@@ -129,6 +129,7 @@ class BackdropScaffold extends StatefulWidget {
   /// Defaults to `true`.
   final bool resizeToAvoidBottomInset;
 
+  final Color backgroundColor;
   final MaterialScaffoldData materialScaffoldData;
   final CupertinoPageScaffoldData cupertinoPageScaffoldData;
 
@@ -148,6 +149,7 @@ class BackdropScaffold extends StatefulWidget {
     this.stickyFrontLayer = false,
     this.animationCurve = Curves.linear,
     this.resizeToAvoidBottomInset = true,
+    this.backgroundColor,
     this.materialScaffoldData,
     this.cupertinoPageScaffoldData,
   });
@@ -299,6 +301,7 @@ class _BackdropScaffoldState extends State<BackdropScaffold>
       onWillPop: () => _willPopCallback(context),
       child: PlatformScaffold(
         key: scaffoldKey,
+        backgroundColor: widget.backgroundColor,
         android: (_) => widget.materialScaffoldData,
         ios: (_) => widget.cupertinoPageScaffoldData,
         appBar: PlatformAppBar(
@@ -375,17 +378,18 @@ class BackdropToggleButton extends StatelessWidget {
   ///
   /// Defaults to [AnimatedIcons.close_menu].
   final AnimatedIconData icon;
+  final Color color;
 
   /// Creates an instance of [BackdropToggleButton].
-  const BackdropToggleButton({
-    this.icon = AnimatedIcons.close_menu,
-  });
+  const BackdropToggleButton(
+      {this.icon = AnimatedIcons.close_menu, this.color = Colors.white});
 
   @override
   Widget build(BuildContext context) {
     return PlatformIconButton(
       icon: AnimatedIcon(
         icon: icon,
+        color: color,
         progress: Backdrop.of(context).controller.view,
       ),
       onPressed: () => Backdrop.of(context).fling(),
