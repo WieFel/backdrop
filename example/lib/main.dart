@@ -1,12 +1,13 @@
 import 'package:backdrop/backdrop.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 
 void main() => runApp(MyApp());
 
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return PlatformApp(
       title: 'Backdrop Demo',
       home: BackdropScaffold(
         title: Text("Backdrop Example"),
