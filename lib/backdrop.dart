@@ -129,6 +129,9 @@ class BackdropScaffold extends StatefulWidget {
   /// Defaults to `true`.
   final bool resizeToAvoidBottomInset;
 
+  final MaterialScaffoldData materialScaffoldData;
+  final CupertinoPageScaffoldData cupertinoPageScaffoldData;
+
   /// Creates a backdrop scaffold to be used as a material widget.
   BackdropScaffold({
     this.controller,
@@ -145,6 +148,8 @@ class BackdropScaffold extends StatefulWidget {
     this.stickyFrontLayer = false,
     this.animationCurve = Curves.linear,
     this.resizeToAvoidBottomInset = true,
+    this.materialScaffoldData,
+    this.cupertinoPageScaffoldData,
   });
 
   @override
@@ -294,7 +299,8 @@ class _BackdropScaffoldState extends State<BackdropScaffold>
       onWillPop: () => _willPopCallback(context),
       child: PlatformScaffold(
         key: scaffoldKey,
-        backgroundColor: Colors.orange,
+        android: (_) => widget.materialScaffoldData,
+        ios: (_) => widget.cupertinoPageScaffoldData,
         appBar: PlatformAppBar(
           title: widget.title,
           trailingActions: widget.iconPosition == BackdropIconPosition.action
