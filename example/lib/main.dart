@@ -22,6 +22,12 @@ class MyApp extends StatelessWidget {
           BackdropToggleButton(
             icon: AnimatedIcons.list_view,
           ),
+          BackdropToggleButton(
+            icon: AnimatedIcons.home_menu,
+          ),
+          BackdropToggleButton(
+            icon: AnimatedIcons.menu_home,
+          ),
         ],
       ),
     );

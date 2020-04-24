@@ -294,6 +294,7 @@ class _BackdropScaffoldState extends State<BackdropScaffold>
       onWillPop: () => _willPopCallback(context),
       child: PlatformScaffold(
         key: scaffoldKey,
+        backgroundColor: Colors.orange,
         appBar: PlatformAppBar(
           title: widget.title,
           trailingActions: widget.iconPosition == BackdropIconPosition.action
