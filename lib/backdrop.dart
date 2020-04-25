@@ -264,7 +264,7 @@ class _BackdropScaffoldState extends State<BackdropScaffold>
     return FocusScope(
       canRequestFocus: isBackPanelVisible,
       child: Material(
-        color: Theme.of(context).primaryColor,
+        color: widget.backgroundColor,
         child: Column(
           children: <Widget>[
             Flexible(
