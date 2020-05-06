@@ -11,6 +11,7 @@ class MyApp extends StatelessWidget {
       title: 'Backdrop Demo',
       home: BackdropScaffold(
         title: Text("Backdrop Example"),
+        backgroundColor: Colors.blue,
         backLayer: Center(
           child: Text("Back Layer"),
         ),
