@@ -129,8 +129,15 @@ class BackdropScaffold extends StatefulWidget {
   /// Defaults to `true`.
   final bool resizeToAvoidBottomInset;
 
+  /// Background color for the scaffold.
   final Color backgroundColor;
+
+  /// [MaterialScaffoldData] passed to PlatformScaffold underlying the
+  /// [BackdropScaffold] implementation.
   final MaterialScaffoldData materialScaffoldData;
+
+  /// [CupertinoPageScaffoldData] passed to PlatformScaffold underlying the
+  /// [BackdropScaffold] implementation.
   final CupertinoPageScaffoldData cupertinoPageScaffoldData;
 
   /// Creates a backdrop scaffold to be used as a material widget.
@@ -378,6 +385,8 @@ class BackdropToggleButton extends StatelessWidget {
   ///
   /// Defaults to [AnimatedIcons.close_menu].
   final AnimatedIconData icon;
+
+  /// The animated icon's foreground color.
   final Color color;
 
   /// Creates an instance of [BackdropToggleButton].
