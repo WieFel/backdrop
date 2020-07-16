@@ -17,6 +17,7 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  flutter_platform_widgets: ^0.51.0
 
 dev_dependencies:
   flutter_test:

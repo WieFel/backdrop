@@ -1,5 +1,6 @@
 import 'package:backdrop/backdrop.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 
 void main() => runApp(MyApp());
 
@@ -14,12 +15,14 @@ class _MyAppState extends State<MyApp> {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return PlatformApp(
       title: 'Backdrop Demo',
       home: BackdropScaffold(
-        appBar: BackdropAppBar(
+        appBar: PlatformAppBar(
           title: Text("Navigation Example"),
-          actions: <Widget>[
+          leading: BackdropToggleButton(),
+          material: (_, __) => MaterialAppBarData(elevation: 0.0),
+          trailingActions: <Widget>[
             BackdropToggleButton(
               icon: AnimatedIcons.list_view,
             )

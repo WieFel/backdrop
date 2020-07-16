@@ -1,6 +1,5 @@
-import 'package:backdrop/app_bar.dart';
-import 'package:backdrop/button.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 
 /// This class is an InheritedWidget that exposes state of [BackdropScaffold]
 /// [BackdropScaffoldState] to be accessed from anywhere below the widget tree.
@@ -72,7 +71,7 @@ class BackdropScaffold extends StatefulWidget {
   final Widget title;
 
   /// App bar used for [BackdropScaffold].
-  final PreferredSizeWidget appBar;
+  final PlatformAppBar appBar;
 
   /// Content that should be displayed on the back layer.
   final Widget backLayer;
@@ -117,14 +116,6 @@ class BackdropScaffold extends StatefulWidget {
   /// ```
   final BorderRadius frontLayerBorderRadius;
 
-  /// Deprecated. Use [BackdropAppBar]'s properties [BackdropAppBar.leading] and
-  /// [BackdropAppBar.automaticallyImplyLeading] to achieve the same behaviour.
-  ///
-  /// The position of the icon button that toggles the backdrop functionality.
-  ///
-  /// Defaults to [BackdropIconPosition.leading].
-  final BackdropIconPosition iconPosition;
-
   /// A flag indicating whether the front layer should stick to the height of
   /// the back layer when being opened.
   ///
@@ -137,31 +128,10 @@ class BackdropScaffold extends StatefulWidget {
   /// Defaults to [Curves.easeInOut].
   final Curve animationCurve;
 
-  /// Passed to the [Scaffold] underlying [BackdropScaffold].
-  /// See [Scaffold.resizeToAvoidBottomInset].
-  ///
-  /// Defaults to `true`.
-  final bool resizeToAvoidBottomInset;
-
   /// Background [Color] for the back layer.
   ///
   /// Defaults to `Theme.of(context).primaryColor`.
   final Color backLayerBackgroundColor;
-
-  /// [FloatingActionButton] for the [Scaffold]
-  ///
-  /// Defaults to `null` which leads the [Scaffold] without a [FloatingActionButton].
-  final Widget floatingActionButton;
-
-  /// [FloatingActionButtonLocation] for the [FloatingActionButton] in the [Scaffold]
-  ///
-  /// Defaults to `null` which leads Scaffold to use the default [FloatingActionButtonLocation]
-  final FloatingActionButtonLocation floatingActionButtonLocation;
-
-  /// [FloatingActionButtonAnimator] for the [FloatingActionButton] in the [Scaffold]
-  ///
-  /// Defaults to `null` which leads Scaffold to use the default [FloatingActionButtonAnimator]
-  final FloatingActionButtonAnimator floatingActionButtonAnimator;
 
   /// Defines the color for the inactive front layer.
   /// Implicitly an opacity of 0.7 is applied to the passed color.
@@ -175,12 +145,20 @@ class BackdropScaffold extends StatefulWidget {
   /// Will be called when [backLayer] have been revealed.
   final VoidCallback onBackLayerRevealed;
 
+  /// [MaterialScaffoldData] passed to PlatformScaffold underlying the
+  /// [BackdropScaffold] implementation.
+  final MaterialScaffoldData materialScaffoldData;
+
+  /// [CupertinoPageScaffoldData] passed to PlatformScaffold underlying the
+  /// [BackdropScaffold] implementation.
+  final CupertinoPageScaffoldData cupertinoPageScaffoldData;
+
   /// Creates a backdrop scaffold to be used as a material widget.
   BackdropScaffold({
     this.controller,
     @Deprecated("Replace by use of BackdropAppBar. See BackdropAppBar.title."
         "This feature was deprecated after v0.2.17.")
-    this.title,
+        this.title,
     this.appBar,
     this.backLayer,
     this.frontLayer,
@@ -188,26 +166,20 @@ class BackdropScaffold extends StatefulWidget {
     this.subHeaderAlwaysActive = true,
     @Deprecated("Replace by use of BackdropAppBar. See BackdropAppBar.actions."
         "This feature was deprecated after v0.2.17.")
-    this.actions = const <Widget>[],
+        this.actions = const <Widget>[],
     this.headerHeight,
     this.frontLayerBorderRadius = const BorderRadius.only(
       topLeft: Radius.circular(16.0),
       topRight: Radius.circular(16.0),
     ),
-    @Deprecated("Replace by use of BackdropAppBar. See BackdropAppBar.leading"
-        "and BackdropAppBar.automaticallyImplyLeading."
-        "This feature was deprecated after v0.2.17.")
-    this.iconPosition = BackdropIconPosition.leading,
     this.stickyFrontLayer = false,
     this.animationCurve = Curves.easeInOut,
-    this.resizeToAvoidBottomInset = true,
     this.backLayerBackgroundColor,
-    this.floatingActionButton,
     this.inactiveOverlayColor = const Color(0xFFEEEEEE),
-    this.floatingActionButtonLocation,
-    this.floatingActionButtonAnimator,
     this.onBackLayerConcealed,
     this.onBackLayerRevealed,
+    this.materialScaffoldData,
+    this.cupertinoPageScaffoldData,
   });
 
   @override
@@ -289,7 +261,7 @@ class BackdropScaffoldState extends State<BackdropScaffold>
   /// Wether the back layer is concealed or not.
   bool get isBackLayerConcealed =>
       controller.status == AnimationStatus.completed ||
-          controller.status == AnimationStatus.forward;
+      controller.status == AnimationStatus.forward;
 
   /// Deprecated. Use [isBackLayerRevealed] instead.
   ///
@@ -301,7 +273,7 @@ class BackdropScaffoldState extends State<BackdropScaffold>
   /// Whether the back layer is revealed or not.
   bool get isBackLayerRevealed =>
       controller.status == AnimationStatus.dismissed ||
-          controller.status == AnimationStatus.reverse;
+      controller.status == AnimationStatus.reverse;
 
   /// Toggles the backdrop functionality.
   ///
@@ -356,8 +328,8 @@ class BackdropScaffoldState extends State<BackdropScaffold>
 
     // if subHeader then height of subHeader
     return ((_subHeaderKey.currentContext?.findRenderObject() as RenderBox)
-        ?.size
-        ?.height) ??
+            ?.size
+            ?.height) ??
         32.0;
   }
 
@@ -365,7 +337,7 @@ class BackdropScaffoldState extends State<BackdropScaffold>
       ((_backLayerKey.currentContext?.findRenderObject() as RenderBox)
           ?.size
           ?.height) ??
-          0.0;
+      0.0;
 
   Animation<RelativeRect> _getPanelAnimation(
       BuildContext context, BoxConstraints constraints) {
@@ -473,21 +445,12 @@ class BackdropScaffoldState extends State<BackdropScaffold>
   Widget _buildBody(BuildContext context) {
     return WillPopScope(
       onWillPop: () => _willPopCallback(context),
-      child: Scaffold(
+      child: PlatformScaffold(
         key: scaffoldKey,
-        floatingActionButtonLocation: this.widget.floatingActionButtonLocation,
-        floatingActionButtonAnimator: this.widget.floatingActionButtonAnimator,
-        appBar: widget.appBar ??
-            AppBar(
-              title: widget.title,
-              actions: widget.iconPosition == BackdropIconPosition.action
-                  ? <Widget>[BackdropToggleButton()] + widget.actions
-                  : widget.actions,
-              elevation: 0.0,
-              leading: widget.iconPosition == BackdropIconPosition.leading
-                  ? BackdropToggleButton()
-                  : null,
-            ),
+        backgroundColor: widget.backLayerBackgroundColor,
+        material: (_, __) => widget.materialScaffoldData,
+        cupertino: (_, __) => widget.cupertinoPageScaffoldData,
+        appBar: widget.appBar,
         body: LayoutBuilder(
           builder: (context, constraints) {
             return Container(
@@ -503,8 +466,6 @@ class BackdropScaffoldState extends State<BackdropScaffold>
             );
           },
         ),
-        floatingActionButton: this.widget.floatingActionButton,
-        resizeToAvoidBottomInset: widget.resizeToAvoidBottomInset,
       ),
     );
   }
