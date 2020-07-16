@@ -1,3 +1,43 @@
+## [0.4.1] - 6 June 2020
+
+* making `_BackdropScaffoldState` class public [https://github.com/fluttercommunity/backdrop/pull/36] 
+
+## [0.4.0] - 6 June 2020
+
+* refactor `backdrop.dart` to smaller dart files [https://github.com/fluttercommunity/backdrop/pull/32]
+
+## [0.3.4] - 5 June 2020
+
+* `subHeader` attribute added to `BackdropScaffold` [https://github.com/fluttercommunity/backdrop/pull/29]
+* `BackdropSubHeader` provided to implement sub header following MDG [https://github.com/fluttercommunity/backdrop/pull/29]
+
+## [0.3.3] - 4 June 2020
+
+* refactor `showFrontLayer` to `concealBackLayer` and `showBackLayer` to `revealBackLayer` [https://github.com/fluttercommunity/backdrop/pull/30]
+* added `onBackLayerConcealed` and `onBackLayerRevealed` callbacks [https://github.com/fluttercommunity/backdrop/pull/30]
+ 
+## [0.3.2] - 28 May 2020
+
+* fix typo [https://github.com/fluttercommunity/backdrop/pull/27]
+
+## [0.3.1] - 27 May 2020
+
+* `floatingActionButton` and other related attributes to `BackdropScaffold` [https://github.com/fluttercommunity/backdrop/pull/21]
+
+## [0.3.0] - 27 May 2020
+
+* `BackdropAppBar` added [https://github.com/fluttercommunity/backdrop/pull/23]
+
+## [0.2.17] - 26 May 2020
+
+* animation duration fix [https://github.com/fluttercommunity/backdrop/pull/19]
+* configurable inactive layer color with animating color change [https://github.com/fluttercommunity/backdrop/pull/20]
+* Improve the front layer border radius [https://github.com/fluttercommunity/backdrop/pull/22]
+
+## [0.2.15] - 15 May 2020
+
+* bug fix: unfocusing keyboard before fling. [https://github.com/fluttercommunity/backdrop/pull/16]
+ 
 ## [0.2.14] - 21 April 2020
 
 * Moved package from `gitlab.com/daadu/backdrop` to `github.com/fluttercommunity/backdrop`

@@ -10,20 +10,25 @@ class MyApp extends StatelessWidget {
     return PlatformApp(
       title: 'Backdrop Demo',
       home: BackdropScaffold(
-        title: Text("Backdrop Example"),
-        backgroundColor: Colors.blue,
+        appBar: PlatformAppBar(
+          title: Text("Backdrop Example"),
+          leading: BackdropToggleButton(),
+          material: (_, __) => MaterialAppBarData(elevation: 0.0),
+          trailingActions: <Widget>[
+            BackdropToggleButton(
+              icon: AnimatedIcons.list_view,
+            )
+          ],
+        ),
         backLayer: Center(
           child: Text("Back Layer"),
+        ),
+        subHeader: BackdropSubHeader(
+          title: Text("Sub Header"),
         ),
         frontLayer: Center(
           child: Text("Front Layer"),
         ),
-        iconPosition: BackdropIconPosition.leading,
-        actions: <Widget>[
-          BackdropToggleButton(
-            icon: AnimatedIcons.list_view,
-          ),
-        ],
       ),
     );
   }
