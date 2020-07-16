@@ -1,7 +1,8 @@
+import 'package:flutter/material.dart';
 import 'package:backdrop/app_bar.dart';
 import 'package:backdrop/button.dart';
 import 'package:flutter/gestures.dart';
-import 'package:flutter/material.dart';
+import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 import 'package:flutter/scheduler.dart';
 
 /// This class is an InheritedWidget that exposes state of [BackdropScaffold]
@@ -73,6 +74,9 @@ class BackdropScaffold extends StatefulWidget {
   /// The widget assigned to the [Scaffold]'s [AppBar.title].
   final Widget title;
 
+  /// App bar used for [BackdropScaffold].
+  final PlatformAppBar appBar;
+
   /// Content that should be displayed on the back layer.
   final Widget backLayer;
 
@@ -115,14 +119,6 @@ class BackdropScaffold extends StatefulWidget {
   /// )
   /// ```
   final BorderRadius frontLayerBorderRadius;
-
-  /// Deprecated. Use [BackdropAppBar]'s properties [BackdropAppBar.leading] and
-  /// [BackdropAppBar.automaticallyImplyLeading] to achieve the same behaviour.
-  ///
-  /// The position of the icon button that toggles the backdrop functionality.
-  ///
-  /// Defaults to [BackdropIconPosition.leading].
-  final BackdropIconPosition iconPosition;
 
   /// A flag indicating whether the front layer should stick to the height of
   /// the back layer when being opened.
@@ -169,81 +165,13 @@ class BackdropScaffold extends StatefulWidget {
   /// Will be called when [backLayer] have been revealed.
   final VoidCallback onBackLayerRevealed;
 
-  // ------------- PROPERTIES TAKEN OVER FROM SCAFFOLD ------------- //
-  
-   /// A key to use when building the [Scaffold].
-  final GlobalKey<ScaffoldState> scaffoldKey;
+  /// [MaterialScaffoldData] passed to PlatformScaffold underlying the
+  /// [BackdropScaffold] implementation.
+  final MaterialScaffoldData materialScaffoldData;
 
-  /// See [Scaffold.appBar].
-  final PreferredSizeWidget appBar;
-
-  /// See [Scaffold.extendBody].
-  ///
-  /// Defaults to `false`.
-  final bool extendBody;
-
-  /// See [Scaffold.extendBodyBehindAppBar].
-  ///
-  /// Defaults to `false`.
-  final bool extendBodyBehindAppBar;
-
-  /// See [Scaffold.floatingActionButton].
-  final Widget floatingActionButton;
-
-  /// See [Scaffold.floatingActionButtonLocation].
-  final FloatingActionButtonLocation floatingActionButtonLocation;
-
-  /// See [Scaffold.floatingActionButtonAnimator].
-  final FloatingActionButtonAnimator floatingActionButtonAnimator;
-
-  /// See [Scaffold.persistentFooterButtons].
-  final List<Widget> persistentFooterButtons;
-
-  /// See [Scaffold.drawer].
-  final Widget drawer;
-
-  /// See [Scaffold.endDrawer].
-  final Widget endDrawer;
-
-  /// See [Scaffold.drawerScrimColor].
-  final Color drawerScrimColor;
-
-  /// See [Scaffold.backgroundColor].
-  final Color backgroundColor;
-
-  /// See [Scaffold.bottomNavigationBar].
-  final Widget bottomNavigationBar;
-
-  /// See [Scaffold.bottomSheet].
-  final Widget bottomSheet;
-
-  /// See [Scaffold.resizeToAvoidBottomInset].
-  ///
-  /// Defaults to `true`.
-  final bool resizeToAvoidBottomInset;
-
-  /// See [Scaffold.primary].
-  ///
-  /// Defaults to `true`.
-  final bool primary;
-
-  /// See [Scaffold.drawerDragStartBehavior].
-  ///
-  /// Defaults to `DragStartBehavior.start`.
-  final DragStartBehavior drawerDragStartBehavior;
-
-  /// See [Scaffold.drawerEdgeDragWidth].
-  final double drawerEdgeDragWidth;
-
-  /// See [Scaffold.drawerEnableOpenDragGesture].
-  ///
-  /// Defaults to `true`.
-  final bool drawerEnableOpenDragGesture;
-
-  /// See [Scaffold.endDrawerEnableOpenDragGesture].
-  ///
-  /// Defaults to `true`.
-  final bool endDrawerEnableOpenDragGesture;
+  /// [CupertinoPageScaffoldData] passed to PlatformScaffold underlying the
+  /// [BackdropScaffold] implementation.
+  final CupertinoPageScaffoldData cupertinoPageScaffoldData;
 
   /// Creates a backdrop scaffold to be used as a material widget.
   BackdropScaffold({
@@ -252,6 +180,7 @@ class BackdropScaffold extends StatefulWidget {
     @Deprecated("Replace by use of BackdropAppBar. See BackdropAppBar.title."
         "This feature was deprecated after v0.2.17.")
         this.title,
+    this.appBar,
     this.backLayer,
     this.frontLayer,
     this.subHeader,
@@ -264,10 +193,6 @@ class BackdropScaffold extends StatefulWidget {
       topLeft: Radius.circular(16.0),
       topRight: Radius.circular(16.0),
     ),
-    @Deprecated("Replace by use of BackdropAppBar. See BackdropAppBar.leading"
-        "and BackdropAppBar.automaticallyImplyLeading."
-        "This feature was deprecated after v0.2.17.")
-        this.iconPosition = BackdropIconPosition.leading,
     this.stickyFrontLayer = false,
     this.animationCurve = Curves.easeInOut,
     this.frontLayerBackgroundColor,
@@ -276,26 +201,8 @@ class BackdropScaffold extends StatefulWidget {
     this.inactiveOverlayOpacity = 0.7,
     this.onBackLayerConcealed,
     this.onBackLayerRevealed,
-    this.scaffoldKey,
-    this.appBar,
-    this.floatingActionButton,
-    this.floatingActionButtonLocation,
-    this.floatingActionButtonAnimator,
-    this.persistentFooterButtons,
-    this.drawer,
-    this.endDrawer,
-    this.bottomNavigationBar,
-    this.bottomSheet,
-    this.backgroundColor,
-    this.resizeToAvoidBottomInset,
-    this.primary = true,
-    this.drawerDragStartBehavior = DragStartBehavior.start,
-    this.extendBody = false,
-    this.extendBodyBehindAppBar = false,
-    this.drawerScrimColor,
-    this.drawerEdgeDragWidth,
-    this.drawerEnableOpenDragGesture = true,
-    this.endDrawerEnableOpenDragGesture = true,
+    this.materialScaffoldData,
+    this.cupertinoPageScaffoldData,
   })  : assert(inactiveOverlayOpacity >= 0.0 && inactiveOverlayOpacity <= 1.0),
         super(key: key);
 
@@ -554,19 +461,12 @@ class BackdropScaffoldState extends State<BackdropScaffold>
   Widget _buildBody(BuildContext context) {
     return WillPopScope(
       onWillPop: () => _willPopCallback(context),
-      child: Scaffold(
+      child: PlatformScaffold(
         key: scaffoldKey,
-        appBar: widget.appBar ??
-            AppBar(
-              title: widget.title,
-              actions: widget.iconPosition == BackdropIconPosition.action
-                  ? <Widget>[BackdropToggleButton()] + widget.actions
-                  : widget.actions,
-              elevation: 0.0,
-              leading: widget.iconPosition == BackdropIconPosition.leading
-                  ? BackdropToggleButton()
-                  : null,
-            ),
+        backgroundColor: widget.backLayerBackgroundColor,
+        material: (_, __) => widget.materialScaffoldData,
+        cupertino: (_, __) => widget.cupertinoPageScaffoldData,
+        appBar: widget.appBar,
         body: LayoutBuilder(
           builder: (context, constraints) {
             return Container(
@@ -583,24 +483,6 @@ class BackdropScaffoldState extends State<BackdropScaffold>
             );
           },
         ),
-        floatingActionButton: widget.floatingActionButton,
-        floatingActionButtonLocation: widget.floatingActionButtonLocation,
-        floatingActionButtonAnimator: widget.floatingActionButtonAnimator,
-        persistentFooterButtons: widget.persistentFooterButtons,
-        drawer: widget.drawer,
-        endDrawer: widget.endDrawer,
-        bottomNavigationBar: widget.bottomNavigationBar,
-        bottomSheet: widget.bottomSheet,
-        backgroundColor: widget.backgroundColor,
-        resizeToAvoidBottomInset: widget.resizeToAvoidBottomInset,
-        primary: widget.primary,
-        drawerDragStartBehavior: widget.drawerDragStartBehavior,
-        extendBody: widget.extendBody,
-        extendBodyBehindAppBar: widget.extendBodyBehindAppBar,
-        drawerScrimColor: widget.drawerScrimColor,
-        drawerEdgeDragWidth: widget.drawerEdgeDragWidth,
-        drawerEnableOpenDragGesture: widget.drawerEnableOpenDragGesture,
-        endDrawerEnableOpenDragGesture: widget.endDrawerEnableOpenDragGesture,
       ),
     );
   }
@@ -615,6 +497,7 @@ class BackdropScaffoldState extends State<BackdropScaffold>
     );
   }
 }
+
 
 /// Widget to get size of child widget
 /// Credit: https://stackoverflow.com/a/60868972/2554745
