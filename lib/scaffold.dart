@@ -74,9 +74,6 @@ class BackdropScaffold extends StatefulWidget {
   /// The widget assigned to the [Scaffold]'s [AppBar.title].
   final Widget title;
 
-  /// App bar used for [BackdropScaffold].
-  final PlatformAppBar appBar;
-
   /// Content that should be displayed on the back layer.
   final Widget backLayer;
 
@@ -165,6 +162,11 @@ class BackdropScaffold extends StatefulWidget {
   /// Will be called when [backLayer] have been revealed.
   final VoidCallback onBackLayerRevealed;
 
+  // ------------- PROPERTIES TAKEN OVER FROM SCAFFOLD ------------- //
+
+  /// See [Scaffold.appBar].
+  final PlatformAppBar appBar;
+
   /// [MaterialScaffoldData] passed to PlatformScaffold underlying the
   /// [BackdropScaffold] implementation.
   final MaterialScaffoldData materialScaffoldData;
@@ -201,6 +203,7 @@ class BackdropScaffold extends StatefulWidget {
     this.inactiveOverlayOpacity = 0.7,
     this.onBackLayerConcealed,
     this.onBackLayerRevealed,
+    this.appBar,
     this.materialScaffoldData,
     this.cupertinoPageScaffoldData,
   })  : assert(inactiveOverlayOpacity >= 0.0 && inactiveOverlayOpacity <= 1.0),
