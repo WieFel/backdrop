@@ -34,6 +34,8 @@ class BackdropToggleButton extends StatelessWidget {
   final AnimatedIconData icon;
 
   /// The animated icon's foreground color.
+  ///
+  /// Defaults to [Colors.white].
   final Color color;
 
   /// Creates an instance of [BackdropToggleButton].
