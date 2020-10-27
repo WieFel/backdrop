@@ -1,7 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:backdrop/app_bar.dart';
-import 'package:backdrop/button.dart';
-import 'package:flutter/gestures.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 import 'package:flutter/scheduler.dart';
 
@@ -164,6 +161,9 @@ class BackdropScaffold extends StatefulWidget {
 
   // ------------- PROPERTIES TAKEN OVER FROM SCAFFOLD ------------- //
 
+  /// A key to use when building the [Scaffold].
+  final GlobalKey<ScaffoldState> scaffoldKey;
+
   /// See [Scaffold.appBar].
   final PlatformAppBar appBar;
 
@@ -182,6 +182,7 @@ class BackdropScaffold extends StatefulWidget {
     @Deprecated("Replace by use of BackdropAppBar. See BackdropAppBar.title."
         "This feature was deprecated after v0.2.17.")
         this.title,
+    this.scaffoldKey,
     this.appBar,
     this.backLayer,
     this.frontLayer,
@@ -203,7 +204,6 @@ class BackdropScaffold extends StatefulWidget {
     this.inactiveOverlayOpacity = 0.7,
     this.onBackLayerConcealed,
     this.onBackLayerRevealed,
-    this.appBar,
     this.materialScaffoldData,
     this.cupertinoPageScaffoldData,
   })  : assert(inactiveOverlayOpacity >= 0.0 && inactiveOverlayOpacity <= 1.0),
