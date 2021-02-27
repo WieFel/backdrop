@@ -50,7 +50,7 @@ class BackdropToggleButton extends StatelessWidget {
       icon: AnimatedIcon(
         icon: icon,
         color: color,
-        progress: Backdrop.of(context).controller.view,
+        progress: Backdrop.of(context).animationController.view,
       ),
       cupertino: (_, __) => CupertinoIconButtonData(padding: EdgeInsets.all(0.0)),
       onPressed: () => Backdrop.of(context).fling(),

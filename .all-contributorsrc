@@ -25,7 +25,9 @@
         "code",
         "doc",
         "bug",
-        "review"
+        "review",
+        "example",
+        "infra"
       ]
     },
     {
@@ -135,6 +137,52 @@
       "name": "Yaroslav Pronin",
       "avatar_url": "https://avatars0.githubusercontent.com/u/7840559?v=4",
       "profile": "https://www.proninyaroslav.ru/",
+      "contributions": [
+        "bug"
+      ]
+    },
+    {
+      "login": "kannel-outis",
+      "name": "Enikuomehin Adejuwon",
+      "avatar_url": "https://avatars0.githubusercontent.com/u/32224274?v=4",
+      "profile": "https://github.com/kannel-outis",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
+      "login": "farmery",
+      "name": "Nwachi ifeanyichukwu Victor",
+      "avatar_url": "https://avatars0.githubusercontent.com/u/56759256?v=4",
+      "profile": "https://github.com/farmery",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
+      "login": "mockturtl",
+      "name": "mockturtl",
+      "avatar_url": "https://avatars0.githubusercontent.com/u/705804?v=4",
+      "profile": "https://github.com/mockturtl",
+      "contributions": [
+        "code",
+        "doc"
+      ]
+    },
+    {
+      "login": "rtr-dnd",
+      "name": "ritar",
+      "avatar_url": "https://avatars0.githubusercontent.com/u/19490811?v=4",
+      "profile": "https://github.com/rtr-dnd",
+      "contributions": [
+        "bug"
+      ]
+    },
+    {
+      "login": "LorenzoVianello",
+      "name": "LorenzoVianello",
+      "avatar_url": "https://avatars0.githubusercontent.com/u/32164824?v=4",
+      "profile": "https://github.com/LorenzoVianello",
       "contributions": [
         "bug"
       ]

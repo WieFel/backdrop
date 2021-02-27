@@ -1,3 +1,32 @@
+## [0.5.2] - 27 February 2021
+
+* `example`: referring "live demo" so that it shows up in pub.dev
+* `example`: proper sdk constraints and migrated to Flutter Android Embedding v2
+* `ci-cd`: `deploy_demo` fix
+* `BackdropScaffold`: added `revealBackLayerAtStart` property [[#82](https://github.com/fluttercommunity/backdrop/pull/82)]
+* `BackdropScaffold`: renamed `controller` -> `animationController` property and state "getter" [[#82](https://github.com/fluttercommunity/backdrop/pull/82)]
+
+## [0.5.1] - 23 February 2021
+
+* `readme`: minor fix
+
+## [0.5.0] - 23 February 2021
+
+* `demo`: use `gallerize` package [[#67](https://github.com/fluttercommunity/backdrop/issues/67)]
+* `demo`: auto-deploy with new tag creation with Github Actions [[#69](https://github.com/fluttercommunity/backdrop/pull/69)]
+* `dart`: requires Dart >= 2.3 **BREAKING** [[#73](https://github.com/fluttercommunity/backdrop/pull/73)]
+* `BackdropScaffold`: added `frontLayerActiveFactor` and `backLayerScrim`; replaced `inactiveOverlayColor` with `frontLayerScrim`; [[#73](https://github.com/fluttercommunity/backdrop/pull/73)]
+* `BackdropScaffold`: documentation improvement for `subHeader`, `headerHeight` and `stickyFrontLayer` [[#73](https://github.com/fluttercommunity/backdrop/pull/73)]
+* `example`: added example for variable height front layer [[#73](https://github.com/fluttercommunity/backdrop/pull/73)]
+* `BackdropScaffold`: added `reverseAnimationCurve` [[#74](https://github.com/fluttercommunity/backdrop/pull/74)]
+* `readme`: added "Accessing underlying backdrop functionalities" section [[#77](https://github.com/fluttercommunity/backdrop/pull/77)]
+
+## [0.4.7] - 28 October 2020
+
+* `BackdropScaffold`: added `scaffoldKey` [https://github.com/fluttercommunity/backdrop/pull/64]
+* `BackdropScaffold`: added `frontLayerBackgroundColor` [https://github.com/fluttercommunity/backdrop/pull/63, https://github.com/fluttercommunity/backdrop/pull/66]
+* `BackdropNavigationBackLayer`: added `itemPadding`, `itemSplashColor`, `itemSplashBorder` [https://github.com/fluttercommunity/backdrop/pull/65]
+
 ## [0.4.6] - 19 September 2020
 
 * `_MeasureSize`: removed `_OnWidgetSizeChange` in favour of `ValueChanged<Size>`
