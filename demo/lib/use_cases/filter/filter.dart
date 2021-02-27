@@ -1,6 +1,7 @@
 import 'package:backdrop/backdrop.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 
 /// Filter preview app.
 class Filter extends StatefulWidget {
@@ -36,7 +37,7 @@ class _FilterState extends State<Filter> {
     return Theme(
       data: ThemeData.light(),
       child: BackdropScaffold(
-        appBar: BackdropAppBar(
+        appBar: PlatformAppBar(
           title: Text("Filter Example"),
         ),
         backLayer: _createBackLayer(),

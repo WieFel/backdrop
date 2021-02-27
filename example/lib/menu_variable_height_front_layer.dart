@@ -1,5 +1,6 @@
 import 'package:backdrop/backdrop.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 
 void main() => runApp(MyApp());
 
@@ -29,7 +30,7 @@ class _MyAppState extends State<MyApp> {
   Widget build(BuildContext context) => MaterialApp(
       title: 'Backdrop Demo',
       home: BackdropScaffold(
-          appBar: BackdropAppBar(title: Text("AppBar is OK 👍")),
+          appBar: PlatformAppBar(title: Text("AppBar is OK 👍")),
           frontLayer: _pages[_currentIndex],
           stickyFrontLayer: true,
           backLayerScrim: Colors.red.withOpacity(0.5),

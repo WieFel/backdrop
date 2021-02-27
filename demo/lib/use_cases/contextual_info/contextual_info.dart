@@ -2,6 +2,7 @@ import 'package:backdrop/backdrop.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
 import 'package:flutter/rendering.dart';
+import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 
 /// Contextual info preview app.
 class ContextualInfo extends StatelessWidget {
@@ -10,7 +11,7 @@ class ContextualInfo extends StatelessWidget {
     return Theme(
       data: ThemeData.light(),
       child: BackdropScaffold(
-        appBar: BackdropAppBar(
+        appBar: PlatformAppBar(
           title: Text("Contextual Info Example"),
           automaticallyImplyLeading: false,
         ),

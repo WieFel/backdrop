@@ -1,5 +1,6 @@
 import 'package:backdrop/backdrop.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 
 /// Contextual controls preview app.
 class ContextualControls extends StatefulWidget {
@@ -25,7 +26,7 @@ class _ContextualControlsState extends State<ContextualControls> {
     return Theme(
       data: ThemeData.light(),
       child: BackdropScaffold(
-        appBar: BackdropAppBar(
+        appBar: PlatformAppBar(
           title: Text("Contextual Controls Example"),
           automaticallyImplyLeading: false,
         ),

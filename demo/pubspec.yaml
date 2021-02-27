@@ -33,6 +33,7 @@ dependencies:
   # Add backdrop dependency here
   backdrop:
     path: "../"
+  flutter_platform_widgets: ^0.72.0
 
 dev_dependencies:
   flutter_test:
